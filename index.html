@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080706">
+<title>Happy Birthday Kittu 👑</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --gold: #e8c36a;
+  --lightgold: #ffe9a6;
+  --black: #080706;
+}
+
+body {
+  background: var(--black);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, #6c481b24, transparent 35%),
+    radial-gradient(circle at 80% 80%, #c89b3b18, transparent 40%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.gold {
+  color: var(--gold);
+}
+
+.screen {
+  min-height: 100vh;
+  padding: 35px 20px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen.active {
+  display: flex;
+  animation: appear 1s ease;
+}
+
+@keyframes appear {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+.eyebrow {
+  color: var(--gold);
+  letter-spacing: 5px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+h1, h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(48px, 12vw, 90px);
+  line-height: 1.05;
+  background: linear-gradient(120deg,#fff4c9,#d7a83e,#fff0b5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 20px #d6a63d35);
+}
+
+h2 {
+  font-size: clamp(36px, 8vw, 58px);
+  color: var(--lightgold);
+  margin-bottom: 18px;
+}
+
+.description {
+  max-width: 550px;
+  line-height: 1.9;
+  color: #c9c3b7;
+  font-size: 14px;
+  margin: 20px auto 30px;
+}
+
+.btn {
+  padding: 14px 30px;
+  border: 1px solid var(--gold);
+  background: linear-gradient(120deg,#c99a3e,#f5d98d,#bb8b32);
+  color: #171007;
+  font-weight: 700;
+  border-radius: 40px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 0 25px #d7a83e35;
+  transition: .3s;
+  margin: 8px;
+}
+
+.btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 0 35px #e9c36a80;
+}
+
+.secondary {
+  background: transparent;
+  color: var(--gold);
+}
+
+.crown {
+  font-size: 55px;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% {transform: translateY(-12px);}
+}
+
+/* Golden stars */
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  background: var(--gold);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--gold);
+  animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+  0%,100% {opacity:.15; transform:scale(.7);}
+  50% {opacity:1; transform:scale(1.5);}
+}
+
+/* Gift */
+.gift {
+  font-size: 110px;
+  cursor: pointer;
+  display: inline-block;
+  animation: giftBounce 1.5s infinite;
+  filter: drop-shadow(0 0 20px #d5a33c65);
+}
+
+@keyframes giftBounce {
+  0%,100% {transform:translateY(0) rotate(0);}
+  50% {transform:translateY(-15px) rotate(5deg);}
+}
+
+.gift-text {
+  color: var(--gold);
+  margin-top: 20px;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+/* Cake */
+.cake {
+  font-size: 100px;
+  margin: 20px;
+  filter: drop-shadow(0 0 25px #e8c36a55);
+  animation: float 3s infinite;
+}
+
+.candle {
+  font-size: 45px;
+  margin: 10px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.candle.off {
+  opacity: .3;
+  filter: grayscale(1);
+  transform: scale(.8);
+}
+
+/* Message card */
+.message-card {
+  max-width: 570px;
+  width: 100%;
+  border: 1px solid #d5ad55;
+  background: linear-gradient(145deg,#17130d,#0c0a08);
+  padding: 35px 25px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px #c59a3820;
+  margin: 20px auto;
+}
+
+.message-card p {
+  color: #d5cbb6;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 8px;
+  height: 12px;
+  z-index: 100;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(800deg);
+    opacity: 0;
+  }
+}
+
+.heart {
+  color: #e8c36a;
+  font-size: 23px;
+  animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+  50% {transform:scale(1.4);}
+}
+
+.footer {
+  color: #82765c;
+  font-size: 11px;
+  margin-top: 40px;
+  letter-spacing: 2px;
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--gold);
+  width: 0;
+  transition: width .5s;
+  z-index: 200;
+}
+
+@media(max-width:480px) {
+  .screen {padding:25px 17px;}
+  .message-card {padding:25px 18px;}
+  .description {font-size:13px;}
+  .btn {padding:13px 23px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="stars" id="stars"></div>
+
+<!-- SCREEN 1 -->
+<section class="screen active" id="s1">
+  <div class="crown">👑</div>
+  <div class="eyebrow">A Special Day • A Special Person</div>
+  <h1>Hey Kittu!</h1>
+  <p class="description">
+    Today is not just another day.<br>
+    Today is all about celebrating someone
+    who deserves endless happiness.
+  </p>
+  <button class="btn" onclick="go(2)">OPEN YOUR SURPRISE ✨</button>
+  <div class="footer">MADE WITH LOVE & GOOD WISHES</div>
+</section>
+
+<!-- SCREEN 2 -->
+<section class="screen" id="s2">
+  <div class="eyebrow">Something Special Is Waiting</div>
+  <h2>A Little Surprise</h2>
+  <div class="gift" onclick="openGift()" id="gift">🎁</div>
+  <p class="gift-text" id="giftText">TAP THE GIFT TO OPEN IT</p>
+  <p class="description" id="giftMessage">
+    There's a little happiness wrapped just for you.
+  </p>
+  <button class="btn" id="giftNext" style="display:none" onclick="go(3)">
+    CONTINUE →
+  </button>
+</section>
+
+<!-- SCREEN 3 -->
+<section class="screen" id="s3">
+  <div class="eyebrow">The Celebration Begins</div>
+  <h1>Happy Birthday</h1>
+  <h2>Kittu ❤️</h2>
+  <div class="cake">🎂</div>
+  <p class="description">
+    May your life shine brighter than these golden lights.
+    May every dream find its way to you.
+  </p>
+  <div>
+    <span class="candle" id="c1" onclick="blow(1)">🕯️</span>
+    <span class="candle" id="c2" onclick="blow(2)">🕯️</span>
+    <span class="candle" id="c3" onclick="blow(3)">🕯️</span>
+  </div>
+  <p class="gift-text" id="candleText">TAP ALL 3 CANDLES TO MAKE A WISH</p>
+  <button class="btn" onclick="celebrate();go(4)">MY WISH FOR YOU →</button>
+</section>
+
+<!-- SCREEN 4 -->
+<section class="screen" id="s4">
+  <div class="eyebrow">A Message From My Heart</div>
+  <h2>Dear Kittu ✨</h2>
+
+  <div class="message-card">
+    <p>
+      Happy Birthday, Kittu! ❤️<br><br>
+      On your special day, I just want to wish you
+      unlimited happiness, endless smiles and lots
+      of beautiful memories.<br><br>
+
+      May you always have reasons to smile.
+      May your hard work turn into success,
+      your dreams turn into reality and your
+      life be filled with wonderful surprises.<br><br>
+
+      Stay the same amazing person you are.
+      Keep smiling, keep shining and never
+      let anything take away your happiness.
+      <br><br>
+      You deserve all the good things in life!
+    </p>
+  </div>
+
+  <div class="heart">♥</div>
+  <button class="btn" onclick="go(5)">ONE LAST SURPRISE →</button>
+</section>
+
+<!-- SCREEN 5 -->
+<section class="screen" id="s5">
+  <div class="eyebrow">This Moment Is Yours</div>
+  <div class="crown">👑</div>
+  <h1>Stay Blessed</h1>
+  <h2>Kittu!</h2>
+
+  <div class="message-card">
+    <p>
+      Another year, another chapter,
+      another chance to make life beautiful.<br><br>
+
+      Never stop dreaming.<br>
+      Never stop laughing.<br>
+      Never stop being YOU.<br><br>
+
+      May this year bring you more happiness
+      than you could ever imagine.
+      <br><br>
+      Happy Birthday once again! 🎂
+    </p>
+  </div>
+
+  <h2 class="gold">HAPPY BIRTHDAY!</h2>
+  <p class="description">
+    With lots of best wishes and friendship. ❤️
+  </p>
+
+  <button class="btn" onclick="replay()">REPLAY YOUR SURPRISE ↻</button>
+  <div class="footer">DESIGNED ESPECIALLY FOR KITTU</div>
+</section>
+
+<script>
+// Create golden stars
+const starBox = document.getElementById("stars");
+
+for(let i=0; i<65; i++){
+  const star = document.createElement("div");
+  star.className = "star";
+  star.style.left = Math.random()*100 + "%";
+  star.style.top = Math.random()*100 + "%";
+  star.style.animationDelay = Math.random()*3 + "s";
+  star.style.opacity = Math.random();
+  starBox.appendChild(star);
+}
+
+// Screen navigation
+let current = 1;
+
+function go(number){
+  document.getElementById("s"+current).classList.remove("active");
+  current = number;
+  document.getElementById("s"+current).classList.add("active");
+
+  document.getElementById("progress").style.width =
+    (number/5*100) + "%";
+
+  window.scrollTo({top:0, behavior:"smooth"});
+
+  if(number === 3 || number === 5){
+    celebrate();
+  }
+}
+
+// Gift opening
+let giftOpened = false;
+
+function openGift(){
+  if(giftOpened) return;
+  giftOpened = true;
+
+  const gift = document.getElementById("gift");
+  gift.style.animation = "none";
+  gift.innerHTML = "✨🎁✨";
+
+  document.getElementById("giftText").innerText =
+    "SURPRISE UNLOCKED!";
+
+  document.getElementById("giftMessage").innerText =
+    "Your biggest gift is a new year full of happiness, smiles, beautiful memories and endless opportunities!";
+
+  document.getElementById("giftNext").style.display = "inline-block";
+
+  celebrate();
+}
+
+// Candle interaction
+let candles = [false,false,false];
+
+function blow(n){
+  if(candles[n-1]) return;
+
+  candles[n-1] = true;
+
+  const candle = document.getElementById("c"+n);
+  candle.classList.add("off");
+  candle.innerHTML = "💨";
+
+  const count = candles.filter(Boolean).length;
+
+  document.getElementById("candleText").innerText =
+    count === 3
+    ? "YOUR WISHES ARE SENT TO THE UNIVERSE ✨"
+    : (3-count) + " CANDLE(S) LEFT!";
+}
+
+// Celebration confetti
+function celebrate(){
+  const symbols = ["✨","⭐","💛","♥","🎉","✦"];
+
+  for(let i=0;i<55;i++){
+    const item = document.createElement("div");
+    item.className = "confetti";
+    item.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+    item.style.left = Math.random()*100 + "vw";
+    item.style.color = Math.random() > .5 ? "#f5d98d" : "#ffffff";
+    item.style.fontSize = (10+Math.random()*14)+"px";
+    item.style.animationDuration = (2+Math.random()*4)+"s";
+
+    document.body.appendChild(item);
+
+    setTimeout(()=>item.remove(),6500);
+  }
+}
+
+// Replay
+function replay(){
+  giftOpened = false;
+  candles = [false,false,false];
+
+  document.getElementById("gift").innerText = "🎁";
+  document.getElementById("gift").style.animation =
+    "giftBounce 1.5s infinite";
+
+  document.getElementById("giftText").innerText =
+    "TAP THE GIFT TO OPEN IT";
+
+  document.getElementById("giftMessage").innerText =
+    "There's a little happiness wrapped just for you.";
+
+  document.getElementById("giftNext").style.display = "none";
+
+  for(let i=1;i<=3;i++){
+    const c = document.getElementById("c"+i);
+    c.classList.remove("off");
+    c.innerText = "🕯️";
+  }
+
+  document.getElementById("candleText").innerText =
+    "TAP ALL 3 CANDLES TO MAKE A WISH";
+
+  go(1);
+}
+</script>
+
+</body>
+</html>
